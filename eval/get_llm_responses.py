@@ -179,6 +179,6 @@ if __name__ == '__main__':
         artifact_model_name = re.sub(r'[^a-zA-Z0-9-_.]', '-', args.model)
         wandb.log_artifact(args.output_file, 
             name=f"{args.api_name}-{artifact_model_name}-eval-responses", 
-            type=f"eval-responses", 
+            type="eval-responses", 
             aliases=[f"{line_count}-responses"]
         )
