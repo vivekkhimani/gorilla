@@ -38,6 +38,8 @@ from prompt_toolkit.history import InMemoryHistory
 from conv_template import get_conv_template
 
 import warnings
+import math
+
 warnings.filterwarnings('ignore')
 
 # Load Gorilla Model from HF
@@ -109,7 +111,7 @@ def prepare_logits_processor(
 ):
     processor_list = LogitsProcessorList()
 
-    if temperature >= 1e-5 and temperature != 1.0:
+    if temperature >= 1e-5 and not math.isclose(temperature, 1.0, rel_tol=1e-09, abs_tol=0.0):
         processor_list.append(TemperatureLogitsWarper(temperature))
     if repetition_penalty > 1.0:
         processor_list.append(RepetitionPenaltyLogitsProcessor(repetition_penalty))
